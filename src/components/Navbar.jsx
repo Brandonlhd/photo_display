@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const NAV_LINKS = ['Home', 'Collections', 'Favorites'];
 
-export default function Navbar({ onNavigate, activeSection }) {
+export default function Navbar({ onNavigate, activeSection, onLogout }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -77,6 +77,22 @@ export default function Navbar({ onNavigate, activeSection }) {
               </button>
             );
           })}
+          <button
+            onClick={onLogout}
+            style={{
+              fontSize: 13,
+              fontWeight: 400,
+              letterSpacing: '0.08em',
+              color: 'var(--text-secondary)',
+              padding: '4px 0',
+              transition: 'color var(--transition)',
+              textTransform: 'uppercase',
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent)'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+          >
+            Logout
+          </button>
         </div>
       </div>
     </nav>

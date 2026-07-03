@@ -5,11 +5,17 @@ import CategoryFilter from './components/CategoryFilter';
 import PhotoWall from './components/PhotoWall';
 import photos from './data/photos.json';
 import Lightbox from './components/Lightbox';
+import LoginPage from './components/LoginPage';
 
 export default function App() {
+  const [authenticated, setAuthenticated] = useState(false);
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeSection, setActiveSection] = useState('home');
   const [lightboxPhoto, setLightboxPhoto] = useState(null);
+
+  if (!authenticated) {
+    return <LoginPage onLogin={() => setAuthenticated(true)} />;
+  }
 
   const heroPhotos = useMemo(() => {
     const shuffled = [...photos].sort(() => Math.random() - 0.5);
@@ -33,6 +39,7 @@ export default function App() {
   return (
     <>
       <Navbar onNavigate={handleNavigate} activeSection={activeSection} />
+      <Navbar onNavigate={handleNavigate} activeSection={activeSection} onLogout={() => setAuthenticated(false)} />
       <Hero photos={heroPhotos} />
       <div id="gallery-section" style={{ padding: '60px 0 100px' }}>
         <div style={{ marginBottom: 40 }}>
