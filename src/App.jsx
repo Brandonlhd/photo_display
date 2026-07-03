@@ -4,10 +4,12 @@ import Hero from './components/Hero';
 import CategoryFilter from './components/CategoryFilter';
 import PhotoWall from './components/PhotoWall';
 import photos from './data/photos.json';
+import Lightbox from './components/Lightbox';
 
 export default function App() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeSection, setActiveSection] = useState('home');
+  const [lightboxPhoto, setLightboxPhoto] = useState(null);
 
   const heroPhotos = useMemo(() => {
     const shuffled = [...photos].sort(() => Math.random() - 0.5);
@@ -40,8 +42,11 @@ export default function App() {
             onCategoryChange={setActiveCategory}
           />
         </div>
-        <PhotoWall photos={photos} activeCategory={activeCategory} />
+       <PhotoWall photos={photos} activeCategory={activeCategory} onPhotoClick={setLightboxPhoto} />
       </div>
+      {lightboxPhoto && (
+        <Lightbox photo={lightboxPhoto} onClose={() => setLightboxPhoto(null)} />
+      )}
     </>
   );
 }

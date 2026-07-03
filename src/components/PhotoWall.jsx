@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import PhotoCard from './PhotoCard';
 import { useFavorites } from '../context/FavoritesContext';
 
-export default function PhotoWall({ photos, activeCategory }) {
+export default function PhotoWall({ photos, activeCategory, onPhotoClick }) {
   const { isFavorite } = useFavorites();
 
   const filtered = useMemo(() => {
@@ -28,7 +28,7 @@ export default function PhotoWall({ photos, activeCategory }) {
         columnGap: 20,
       }}>
         {filtered.map((photo) => (
-          <PhotoCard key={photo.id} photo={photo} />
+          <PhotoCard key={photo.id} photo={photo} onPhotoClick={onPhotoClick} />
         ))}
       </div>
     </div>

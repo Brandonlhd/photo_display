@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { useFavorites } from '../context/FavoritesContext';
 
-export default function PhotoCard({ photo }) {
+export default function PhotoCard({ photo, onPhotoClick }) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const [visible, setVisible] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -26,8 +26,9 @@ export default function PhotoCard({ photo }) {
 
   return (
     <div
-      ref={ref}
-      onMouseEnter={() => setHovered(true)}
+     ref={ref}
+      onClick={() => onPhotoClick?.(photo)}
+     onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         position: 'relative',
