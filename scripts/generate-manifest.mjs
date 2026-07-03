@@ -49,7 +49,8 @@ async function main() {
       category: folderName,
       albumTitle,
       date,
-      src: `/photos/${encodeURIComponent(folderName)}/${encodeURIComponent(fileName)}`,
+      // Use raw path — browser handles encoding, sirv handles decoding
+      src: `/photos/${folderName}/${fileName}`,
     });
   }
 
