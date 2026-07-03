@@ -13,14 +13,14 @@ export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [lightboxPhoto, setLightboxPhoto] = useState(null);
 
-  if (!authenticated) {
-    return <LoginPage onLogin={() => setAuthenticated(true)} />;
-  }
-
   const heroPhotos = useMemo(() => {
     const shuffled = [...photos].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, 5);
   }, []);
+
+  if (!authenticated) {
+    return <LoginPage onLogin={() => setAuthenticated(true)} />;
+  }
 
   const handleNavigate = (section) => {
     setActiveSection(section);
@@ -38,7 +38,6 @@ export default function App() {
 
   return (
     <>
-      <Navbar onNavigate={handleNavigate} activeSection={activeSection} />
       <Navbar onNavigate={handleNavigate} activeSection={activeSection} onLogout={() => setAuthenticated(false)} />
       <Hero photos={heroPhotos} />
       <div id="gallery-section" style={{ padding: '60px 0 100px' }}>
